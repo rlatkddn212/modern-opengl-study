@@ -59,6 +59,12 @@
 
 
 
+Buffer Object 사용 예제 C05_Buffer
+
+Map Buffer Object 예제 C05_MapBuffer
+
+
+
 #### 버퍼에 데이터 채우기 및 복사
 
 버퍼에 저장하는 데이터가 하나의 상수 값일 경우 사용
@@ -117,6 +123,10 @@
 
 - giGetAttribLocation
   - 설명 : 배열의 속성값 위치를 가져온다.
+
+
+
+쉐이더에 속성값 전달 예제 C05_Attrib
 
 
 
@@ -197,7 +207,7 @@ layout (std140) uniform ExampleBlock
 
 #### 유니폼을 사용한 지오메트리 변환
 
-예제 프로그램 TODO
+예제 프로그램 C05_Uniform
 
 
 
@@ -220,7 +230,8 @@ layout (std140) uniform ExampleBlock
 ### 어토믹 카운터
 
 - 버퍼 객체를 생성할 때 GL_ATOMIC_COUNTER_BUFFER로 생성한다.
-- 어토믹 카운터 예제 (TODO)
+
+쉐이더 스토리지, 어토믹 카운터 예제 C05_ShaderStorage
 
 
 
@@ -272,7 +283,7 @@ layout (std140) uniform ExampleBlock
 
 #### 파일에서 텍스쳐 로딩
 
-- 텍스쳐 로딩 예제(TODO)
+- 텍스쳐 로딩 예제 C05_TextureLoading
 
 
 
@@ -282,7 +293,7 @@ layout (std140) uniform ExampleBlock
   - 텍스쳐 좌표는 0~1사이로 지정되지만 uv값은 1이 넘는 값이 들어 올 수 있다.
   - 래핑 모드는 정규화된 좌표를 넘어갈 때 그 좌표를 어떻게 처리할지 선택하는 방법이다.
 
-래핑 모드 예제 TODO
+래핑 모드 예제 C05_TextureWrapping
 
 
 
@@ -291,14 +302,14 @@ layout (std140) uniform ExampleBlock
   - 인접 필터링, 선형 필터링이 있다. 선형 필터링의 경우 보간된 이미지가 사용된다.
   - 쉐이더에 texture() 함수를 사용
 
-필터링 예제 TODO
+필터링 예제 C05_TextureFiltering
 
 
 
 - 샘플러 객체
   - 하나이상의 샘플러 객체를 읽기 위해선 glGenSamplers를 호출한다.
 
-샘플러 예제 TODO
+샘플러 예제 C05_TextureSampling
 
 
 
@@ -307,7 +318,7 @@ layout (std140) uniform ExampleBlock
 
 
 
-여러장의 텍스처를 사용하는 예제(TODO)
+여러장의 텍스처를 사용하는 예제 C05_MultiTexture
 
 
 
@@ -320,7 +331,7 @@ layout (std140) uniform ExampleBlock
   - glGenerateMipmap으로 텍스쳐 밉맵을 생성할 수 있다.
     - 하지만 미리 만들어진 밉맵을 로딩하는데 훨씬 빠르다.
 
-밉맵 예제 TODO
+밉맵 예제 C05_TextureMipmap
 
 
 
@@ -339,7 +350,7 @@ layout (std140) uniform ExampleBlock
 
 
 
-배열 텍스쳐 예제
+배열 텍스쳐 예제 C05_ArrayTexture
 
 
 
@@ -367,7 +378,7 @@ layout (std140) uniform ExampleBlock
 
 
 
-이미지를 저장하는 예제(TODO)
+이미지를 저장하는 예제 C05_ImageStore
 
 
 

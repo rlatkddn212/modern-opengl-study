@@ -177,7 +177,6 @@ int main()
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
 
 	glUseProgram(programID);
-
 	
 	do
 	{
@@ -188,8 +187,6 @@ int main()
 		glClearBufferfv(GL_COLOR, 0, blue);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-
-
 
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute).

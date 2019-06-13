@@ -21,21 +21,21 @@
   - 두 벡터 사이의 각도를 구할 수 있다.
   - 내적의 결과는 스칼라이다.
   - 내적 공식은 다음과 같다.
-   ![{\displaystyle \mathbf {\color {red}a} \cdot \mathbf {\color {blue}b} =\sum _{i=1}^{n}{\color {red}a}_{i}{\color {blue}b}_{i}={\color {red}a}_{1}{\color {blue}b}_{1}+{\color {red}a}_{2}{\color {blue}b}_{2}+\cdots +{\color {red}a}_{n}{\color {blue}b}_{n}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/5bd0b488ad92250b4e7c2f8ac92f700f8aefddd5)
-    ![{\displaystyle \mathbf {a} \cdot \mathbf {b} =\|\mathbf {a} \|\ \|\mathbf {b} \|\cos(\theta ),}](https://wikimedia.org/api/rest_v1/media/math/render/svg/f578afaa0ed0f3728d4a6546d11b95456ec84647)
+   ![{\displaystyle \mathbf {\color {red}a} \cdot \mathbf {\color {blue}b} =\sum _{i=1}^{n}{\color {red}a}_{i}{\color {blue}b}_{i}={\color {red}a}_{1}{\color {blue}b}_{1}+{\color {red}a}_{2}{\color {blue}b}_{2}+\cdots +{\color {red}a}_{n}{\color {blue}b}_{n}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/5bd0b488ad92250b4e7c2f8ac92f700f8aefddd5)  
+    ![{\displaystyle \mathbf {a} \cdot \mathbf {b} =\|\mathbf {a} \|\ \|\mathbf {b} \|\cos(\theta ),}](https://wikimedia.org/api/rest_v1/media/math/render/svg/f578afaa0ed0f3728d4a6546d11b95456ec84647)  
   
 - 벡터의 외적
   - 외적의 결과는 벡터이다.
   - 외적 계산에서 나오는 스칼라 값도 자주 활용된다.
   - 외적의 경우 계산되는 벡터의 순서도 중요하다.
   - 외적 공식은 다음과 같다.
-  ![\mathbf {a} =\mathbf {b} \times \mathbf {c} ](https://wikimedia.org/api/rest_v1/media/math/render/svg/8e4d134fa6d725f5648e6dd39fb112a22a09d11f)
-  ![{\displaystyle \mathbf {a} ={\begin{bmatrix}a_{x}\\a_{y}\\a_{z}\end{bmatrix}},\mathbf {b} ={\begin{bmatrix}b_{x}\\b_{y}\\b_{z}\end{bmatrix}},\mathbf {c} ={\begin{bmatrix}c_{x}\\c_{y}\\c_{z}\end{bmatrix}}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/5664cca9afe2b7bcd3c5449c038f6257128b730f)
-      ![{\displaystyle a_{x}=b_{y}c_{z}-b_{z}c_{y}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/d37e6a72deeb92305976e28978611cc764efd2bd)
-      ![{\displaystyle a_{y}=b_{z}c_{x}-b_{x}c_{z}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/c71d9a7826acac7affc19e813f6a8744a7d227b3) 
-      ![{\displaystyle a_{z}=b_{x}c_{y}-b_{y}c_{x}.}](https://wikimedia.org/api/rest_v1/media/math/render/svg/df01e0774c7c3da6b1421f2d05d9041f7bd9e547) 
+  ![\mathbf {a} =\mathbf {b} \times \mathbf {c} ](https://wikimedia.org/api/rest_v1/media/math/render/svg/8e4d134fa6d725f5648e6dd39fb112a22a09d11f)  
+  ![{\displaystyle \mathbf {a} ={\begin{bmatrix}a_{x}\\a_{y}\\a_{z}\end{bmatrix}},\mathbf {b} ={\begin{bmatrix}b_{x}\\b_{y}\\b_{z}\end{bmatrix}},\mathbf {c} ={\begin{bmatrix}c_{x}\\c_{y}\\c_{z}\end{bmatrix}}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/5664cca9afe2b7bcd3c5449c038f6257128b730f)  
+      ![{\displaystyle a_{x}=b_{y}c_{z}-b_{z}c_{y}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/d37e6a72deeb92305976e28978611cc764efd2bd)  
+      ![{\displaystyle a_{y}=b_{z}c_{x}-b_{x}c_{z}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/c71d9a7826acac7affc19e813f6a8744a7d227b3)   
+      ![{\displaystyle a_{z}=b_{x}c_{y}-b_{y}c_{x}.}](https://wikimedia.org/api/rest_v1/media/math/render/svg/df01e0774c7c3da6b1421f2d05d9041f7bd9e547)   
   - 아래와 같은 공식으로 계산될 수 있다.
-      ![{\displaystyle \mathbf {a} \times \mathbf {b} =\left\|\mathbf {a} \right\|\left\|\mathbf {b} \right\|\sin(\theta )\ \mathbf {n} }](https://wikimedia.org/api/rest_v1/media/math/render/svg/d48c9d8c853551482314bd603df694e0fd4c995f)
+      ![{\displaystyle \mathbf {a} \times \mathbf {b} =\left\|\mathbf {a} \right\|\left\|\mathbf {b} \right\|\sin(\theta )\ \mathbf {n} }](https://wikimedia.org/api/rest_v1/media/math/render/svg/d48c9d8c853551482314bd603df694e0fd4c995f)  
   - sin 값을 통해 CCW인지 CW인지 체크 가능하다.
   - 외적으로 구해진 벡터의 기하학적 의미는 3차원에서 계산에 사용한 두 벡터에 수직인 벡터이다.
   
@@ -45,9 +45,9 @@
   
 - 반사와 굴절
   - reflection
-[![img](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg/220px-Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg)](https://en.wikipedia.org/wiki/File:Mount_Hood_reflected_in_Mirror_Lake,_Oregon.jpg)
+[![img](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg/220px-Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg)](https://en.wikipedia.org/wiki/File:Mount_Hood_reflected_in_Mirror_Lake,_Oregon.jpg)  
   - 반사의 경우 빛의 입사각과 반사각이 같다.
-- ![1560307901092](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560307901092.png)
+- ![1560307901092](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560307901092.png)  
   
   - 위 그림처럼 입사 벡터를 a,b 벡터로 분해 할 수 있다.
   - 반사벡터의 경우 a벡터에는 영향을 주지 않고 b 벡터의 방향만 바뀐다는 것을 알 수 있다.
@@ -55,13 +55,17 @@
   - R(reflect) = R(in) - 2(dot(N, R(in))N
   
   - refraction
-  ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Refraction_photo.png/220px-Refraction_photo.png)
+  ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Refraction_photo.png/220px-Refraction_photo.png)  
   - 굴절은 굴절률(n)이라는 단위가 추가된다. 
   - 공기(굴절률 1)중에서 매질(굴절률 k)로 이동할 경우
   - 공기에서 매질로 굴절될 경우, 매질 굴절률 /공기 굴절률 = sin(입사각)/ sin(굴절각)
   - ![img](https://www.scratchapixel.com/images/upload/shading-intro/shad-refraction6.png?)
   - 공식은 책에 딸랑 식만 적어뒀는데, 다른 사이트를 찾아보는 것이 좋겠다.
   - 참고 사이트 : <https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/reflection-refraction-fresnel>
+
+
+
+벡터 연산 예제 C04_Vector
 
 
 
@@ -107,6 +111,10 @@
   - 원근 행렬
   - 정사영
 
+
+
+행렬 연산 예제 C04_Matrix
+
 -----------------------------------------
 
 ### 선, 곡선, 스플라인 보간
@@ -144,3 +152,6 @@
 
 
 
+선, 스플라인 예제 C04_Line
+
+![1560417219352](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560417219352.png)
