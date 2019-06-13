@@ -1,7 +1,3 @@
-// OpenGL 빌드 템플릿 입니다.
-// http://www.opengl-tutorial.org 을 참고 했습니다.
-
-
 #pragma warning(disable:4996)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32.lib")
@@ -163,12 +159,20 @@ int main()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
+	// 사각형
 	static const GLfloat g_vertex_buffer_data[] =
 	{
 		-0.5f, -0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
 		-0.5f,  0.5f, 0.0f,
 		0.5f,  0.5f, 0.0f,
+	};
+
+	// subData 로 평행 사변형 꼴로 변경시킴
+	static const GLfloat g_vertex_buffer_data2[] =
+	{
+		-1.0f, 0.5f, 0.0f,
+		1.0f, 0.5f, 0.0f
 	};
 
 	// 버텍스 버퍼에 핸들
@@ -179,6 +183,8 @@ int main()
 	// 버텍스들을 OpenGL로
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
+	// 일부 버퍼 데이터를 변경
+	glBufferSubData(GL_ARRAY_BUFFER, 24, sizeof(g_vertex_buffer_data2), g_vertex_buffer_data2);
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
 
 	glUseProgram(programID);

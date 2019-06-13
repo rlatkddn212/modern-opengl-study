@@ -177,13 +177,15 @@ int main()
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	// 버텍스들을 OpenGL로
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), NULL, GL_STATIC_DRAW);
+	
+	// mapBuffer를 사용하여 데이터를 버퍼에 저장
+	void* ptr = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	memcpy(ptr, g_vertex_buffer_data, sizeof(g_vertex_buffer_data));
+	glUnmapBuffer(GL_ARRAY_BUFFER);
 
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
-
 	glUseProgram(programID);
-	
-	glfwGetTime();
 
 	do
 	{
@@ -201,7 +203,6 @@ int main()
 			0,                  // 다음 요소 까지 간격(stride)
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
-
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glDisableVertexAttribArray(0);

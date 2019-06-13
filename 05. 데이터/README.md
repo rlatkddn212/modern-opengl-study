@@ -59,7 +59,7 @@
 
 
 
-Buffer Object 사용 예제 C05_Buffer
+Buffer Object (glBufferSubData) 사용 예제 C05_Buffer
 
 Map Buffer Object 예제 C05_MapBuffer
 
