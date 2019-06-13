@@ -245,38 +245,182 @@ layout (std140) uniform ExampleBlock
 
 #### 텍스쳐 target, type
 
+| Name | File |
+|------|------|
+|GL_TEXTURE_1D | 1차원 이미지, width 만 있고 height 나 depth가 없다.|
+|GL_TEXTURE_2D| 2차원 이미지, width와 height 가 있고, depth 는 없다.|
+|GL_TEXTURE_3D| 3차원 이미지, width, height, depth 를 가진다.|
+|[GL_TEXTURE_RECTANGLE](https://www.khronos.org/opengl/wiki/Rectangle_Texture)| 사각형 2차원 이미지로 사용시 0~1로 정규화 되지 않는다.|
+|[GL_TEXTURE_BUFFER](https://www.khronos.org/opengl/wiki/Texture_Buffer)| 1차원 이미지와 비슷하지만 버퍼 오브젝트에 저장된다. GL_TEXTURE_1D의 경우 크기 제한이 있지만 이 타입의 경우 BUFFER를 사용하기 때문에 훨씬 큰 사이즈의 데이터를 전달할 수 있다.|
+| [GL_TEXTURE_CUBE_MAP](https://www.khronos.org/opengl/wiki/Cubemap_Texture)|정사각형 2차원 이미지 6장을 가진다.|
+| [GL_TEXTURE_1D_ARRAY](https://www.khronos.org/opengl/wiki/Array_Texture)|하나의 텍스쳐에 1차원 이미지 여러장을 가진다.|
+|GL_TEXTURE_2D_ARRAY|하나의 텍스쳐에 2차원 이미지 여러장을 가진다.|
+|GL_TEXTURE_CUBE_MAP_ARRAY|하나의 텍스쳐에 큐브맵 이미지 여러장을 가진다.|
+| [GL_TEXTURE_2D_MULTISAMPLE](https://www.khronos.org/opengl/wiki/Multisample_Texture)|2차원 이미지, 각 픽셀마다 멀티셈플링이 포함된다.|
+|GL_TEXTURE_2D_MULTISAMPLE_ARRAY| 여러장의 2차원 이미지, 각 픽셀마다 멀티셈플링이 포함된다.|
+
 
 
 #### 셰이더에서 텍스쳐 읽기
+
+- 셰이더에서 유니폼 타입으로 셈플러 변수를 생성하면 텍스처를 읽을 수 있다.
+- 위 텍스쳐 타겟에 대응되는 샘플러 변수가 있다.
+  - ex) GL_TEXTURE_2D => sampler2D
+- 쉐이더에서 텍스처를 읽으려면 texelFetch라는 내장함수를 이용한다.
 
 
 
 #### 파일에서 텍스쳐 로딩
 
+- 텍스쳐 로딩 예제(TODO)
+
 
 
 #### 텍스처 데이터 제어
+
+- 래핑 모드
+  - 텍스쳐 좌표는 0~1사이로 지정되지만 uv값은 1이 넘는 값이 들어 올 수 있다.
+  - 래핑 모드는 정규화된 좌표를 넘어갈 때 그 좌표를 어떻게 처리할지 선택하는 방법이다.
+
+래핑 모드 예제 TODO
+
+
+
+- 필터링 모드
+  - 늘어나거나 줄어든 텍스처 맵으로부터 컬러 프래그먼트를 계산한다.
+  - 인접 필터링, 선형 필터링이 있다. 선형 필터링의 경우 보간된 이미지가 사용된다.
+  - 쉐이더에 texture() 함수를 사용
+
+필터링 예제 TODO
+
+
+
+- 샘플러 객체
+  - 하나이상의 샘플러 객체를 읽기 위해선 glGenSamplers를 호출한다.
+
+샘플러 예제 TODO
+
+
+
+- 여러 텍스처 사용
+  - glGetIntegerv 함수를 사용하여 여러장의 텍스처를 쉐이더 스테이지에서 사용할 수 있다.
+
+
+
+여러장의 텍스처를 사용하는 예제(TODO)
+
+
+
+- 밉맵
+  - 크기에 따라 이미지를 여러 장 사용하여 텍스처를 로딩하는 기법이다.
+  - 알맞은 크기의 텍스처를 사용하지 않으면 여러가지 문제가 생길 수 있다.
+    - 성능 상에 문제
+    - 텍스처는 큰데 매우 작은 크기로 랜더링 할 경우 반짝거림 현상 발생
+  - 밉맵의 경우 여러가지 필터링모드가 있다.
+  - glGenerateMipmap으로 텍스쳐 밉맵을 생성할 수 있다.
+    - 하지만 미리 만들어진 밉맵을 로딩하는데 훨씬 빠르다.
+
+밉맵 예제 TODO
+
+
+
+[함수]
+
+- glGenSamplers
+- glGetIntegerv
+- glActiveTexture
 
 
 
 #### 배열 텍스쳐
 
+- 2D 배열 택스쳐와 3D 텍스쳐와 차이점
+  - 배열 텍스처의 경우 레이어 간에는 필터링이 적용되지 않는다.
+
+
+
+배열 텍스쳐 예제
+
 
 
 #### 쉐이더에서 텍스쳐 출력
+
+- 쉐이더에서 텍스쳐를 사용(읽기)하는 것 뿐만 아니라 텍스쳐를 직접 만들 수도 있다.
+
+  - ​	타겟 타입에 대응 되는 image 변수 타입으로 쉐이더 프로그램에 선언하여 사용한다.
+
+  
+
+[쉐이더 내장 함수]
+
+- imageLoad
+  - 이미지 변수 타입을 읽는다.
+- imageStore
+- 이미지 변수 타입에 이미지를 저장한다.
+
+
+
+[함수]
+
+- glBindImageTexture
+  - 이미지 유닛에 바인딩 한다.
+
+
+
+이미지를 저장하는 예제(TODO)
 
 
 
 #### 이미지 접근 동기화
 
+- 이미지를 쓰는 작업은 여러 쉐이더에서 사용할 수 있기 때문에 동기화 문제가 발생한다.
+- 쉐이더에서 이미지에 대한 아토믹 연산을 지원한다.
+
 
 
 #### 텍스쳐 압축
 
+- 텍스쳐는 메모리 사용량이 크기 때문에 그대로 읽어서 사용하는 것은 좋은 방법이 아니다.
+
+- 텍스처를 압축하여 사용해서 메모리 대역폭 사용을 줄이는 방법을 지원한다.
+
+- 지원하는 압축 포맷
+
+  - 일반 타입 : OpenGL 드라이버가 현재 컴퓨터에 맞는 가장 알맞은 압축 포맷을 자동으로 선택한다. 이 경우  플랫폼마다 압축 포맷이 달라질 수 있기 때문에 랜더링 결과도 달라 질 수 있다.
+
+  - RGTC
+  - BPTC
+  - ETC2
+  - EAC
+  - S3TC
+
+- 공유 지수
+
+  - 부동 소수점 텍스쳐를 사용할 경우 지수부를 공통으로 사용한다. (조금 이해가 힘듬..)
 
 
 
+[함수]
+
+- glGetTexLevelparameteriv
+- glGetInternalFormativ
+- glGetTexLevelparameteriv
+- glGetCompressedTexImage
+- glGetTexParameteriv
 
 
+
+#### 텍스쳐 뷰
+
+- 보통 2D 텍스쳐 데이터를 읽는 쉐이더의 경우 sampler2D를 사용해야 하지만 다른 텍스쳐 타입인 것 처럼 위장하여 사용할 수 있다.
+  - 텍스쳐 뷰를 사용하면된다.
+  - 텍스쳐 뷰를 사용하면, 데이터 타입 뿐만 아니라 이미지 포맷까지 위장 할 수 있다.
+  - 1D 텍스쳐를 2D, 3D 텍스쳐로 사용하진 못하고 어느 정도 호환되는 타입만 가능하다.
+
+
+
+[함수]
+
+- glTextureView
 
 -------------------
