@@ -83,7 +83,7 @@
 
 #### <실행 결과>
 
-![1559881576469](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1559881576469.png)
+![1559881576469](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1559881576469.png)
 
 
 
