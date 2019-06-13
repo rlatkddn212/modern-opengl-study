@@ -47,7 +47,7 @@
   - reflection
 [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg/220px-Mount_Hood_reflected_in_Mirror_Lake%2C_Oregon.jpg)](https://en.wikipedia.org/wiki/File:Mount_Hood_reflected_in_Mirror_Lake,_Oregon.jpg)  
   - 반사의 경우 빛의 입사각과 반사각이 같다.
-- ![1560307901092](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560307901092.png)  
+- ![1560307901092](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560307901092.png)  
   
   - 위 그림처럼 입사 벡터를 a,b 벡터로 분해 할 수 있다.
   - 반사벡터의 경우 a벡터에는 영향을 주지 않고 b 벡터의 방향만 바뀐다는 것을 알 수 있다.
@@ -154,4 +154,4 @@
 
 선, 스플라인 예제 C04_Line
 
-![1560417219352](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560417219352.png)
+![1560417219352](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560417219352.png)

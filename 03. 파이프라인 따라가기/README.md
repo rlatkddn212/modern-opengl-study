@@ -41,7 +41,7 @@
 
 <간단한 vertex Shader 프로그램>
 
-![1559882572144](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1559882572144.png)
+![1559882572144](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1559882572144.png)
 
 - in 저장 지시어의 경우 cpp 코드에서 glVertexAttrib**() 함수를 통해 입력 가능하다.
 
@@ -89,6 +89,7 @@
   2) 테셀레이션이 수행된 다음에 실행되는 테셀레이션 이벨류에이션에 보낼 데이터를 생성한다.
 
 - 패치를 점, 선, 삼각형으로 분할 한다.
+  
   - 패치는 점, 선, 삼각형이 분할되기 전 프리미티브를 말한다.
 - 패치당 정점의 개수를 glPatchParameteri 함수로 조정할 수 있다.
 - glPatchParameteri 에 대응하는 쉐이더 layout 지시어는 layout(vertices=N) out;
@@ -96,6 +97,7 @@
   - gl_TessLevelInner :
   - gl_TessLevelOuter : 
 - 사용자 지정 출력 변수
+  
   - gl_in, gl_out, gl_InvocationID
 
 
@@ -135,7 +137,7 @@ glpatchParameteri를 사용하여 제어점 개수로 하여 호출
 
 C03_Tessellation 예제에서 실행 해볼 수 있다.
 
-![1559933284197](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1559933284197.png)
+![1559933284197](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1559933284197.png)
 
 
 
