@@ -213,6 +213,46 @@ layout (std140) uniform ExampleBlock
 
 
 
+[함수]
+
+- glGetUniformIndices
+  - 설명 : 유니폼 블록의 인덱스를 가져옴 glGetUniformLocation 은 하나만 가져오는데 이 함수는 여러개의 유니폼 인덱스를 얻을 수 있다.
+- glGetActiveUniformsiv
+  - 설명 : 유니폼 블록에 대한 정보를 얻을 수있다. 유니폼의 오프셋, 스트라이드 등
+
+
+
+- glGetUniformIndices, glGetActiveUniformsiv 함수들을 사용하여 버퍼에 데이터 위치들을 알 수 있지만 코드가 길어지게 된다. 
+- std140 표준 레이아웃을 사용하면 OpenGL이 위치를 자동으로 계산하므로 직접 질의하여 데이터 위치를 지정할 필요없어진다.
+
+
+
+[함수]
+
+- glGetUniformBlockIndex
+  - 설명 : 유니폼 블록의 인덱스를 찾아 리턴 받는다.
+  - GLuint program : 쉐이더 프로그램 id
+  - const GLchar* uniformBlockName : 쉐이더에 정의한 유니폼 블록의 이름
+
+- glUniformBlockBinding
+  - 설명 : 유니폼 블록에 할당하는 함수
+  - GLuint program : 변경할 유니폼 블록의 쉐이더 프로그램
+  - GLuint uniformBlockIndex : glGetUniformBlockIndex 통해 얻은 인덱스
+  - GLuint uniformBlockBinding : 바인딩 포인트에 대한 인덱스
+
+
+
+![Diagram of uniform binding points in OpenGL](https://learnopengl.com/img/advanced/advanced_glsl_binding_points.png)
+
+(출처 : <https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL>)
+
+- Binding이란 쉐이더에 각 유니폼 블록과 유니폼 블록을 연결하는 작업이다. 바인딩 포인터를 통해 관리 된다.
+- 쉐이더 프로그램에서 레이아웃 지시어로 바인딩을 지정하면 glUniformBlockBinding 함수를 사용할 필요없다.
+
+- 버퍼 데이터를 변경하려면 MapBuffer나 glBufferSubData를 사용하여 버퍼를 변경하면된다.
+
+
+
 #### 유니폼을 사용한 지오메트리 변환
 
 예제 프로그램 C05_Uniform
@@ -222,6 +262,12 @@ layout (std140) uniform ExampleBlock
 1) glGetUniformLocation를 통해 쉐이더에 유니폼 위치를 찾는다.
 
 2) glUniform*로 유니폼을 채운다.
+
+
+
+C05_UniformBlock 예제
+
+C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. 버퍼의 데이터는 glBufferSubData를 통해 변경하도록 구현했다.
 
 
 
