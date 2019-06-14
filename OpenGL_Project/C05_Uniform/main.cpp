@@ -1,7 +1,3 @@
-// OpenGL 빌드 템플릿 입니다.
-// http://www.opengl-tutorial.org 을 참고 했습니다.
-
-
 #pragma warning(disable:4996)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32.lib")
@@ -17,9 +13,14 @@
 #include <sstream>
 #include <vector>
 #include <time.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 using namespace std;
 
 GLFWwindow* window;
+GLint width;
+GLint height;
 
 void initGLFW()
 {
@@ -37,7 +38,9 @@ void initGLFW()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// window 생성
-	window = glfwCreateWindow(1024, 768, "OpenGL", NULL, NULL);
+	width = 1024;
+	height = 768;
+	window = glfwCreateWindow(width, height, "OpenGL", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -159,39 +162,78 @@ int main()
 	initGLFW();
 	initGLEW();
 
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	static const GLfloat g_vertex_buffer_data[] =
+	// 책 소스코드에서 가져온 데이터
+	static const GLushort vertex_indices[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
+		0, 1, 2,
+		2, 1, 3,
+		2, 3, 4,
+		4, 3, 5,
+		4, 5, 6,
+		6, 5, 7,
+		6, 7, 0,
+		0, 7, 1,
+		6, 0, 2,
+		2, 4, 6,
+		7, 5, 3,
+		7, 3, 1
+	};
+
+	static const GLfloat vertex_positions[] =
+	{
+		-0.25f, -0.25f, -0.25f,
+		-0.25f,  0.25f, -0.25f,
+		 0.25f, -0.25f, -0.25f,
+		 0.25f,  0.25f, -0.25f,
+		 0.25f, -0.25f,  0.25f,
+		 0.25f,  0.25f,  0.25f,
+		-0.25f, -0.25f,  0.25f,
+		-0.25f,  0.25f,  0.25f,
 	};
 
 	// 버텍스 버퍼에 핸들
-	GLuint vertexbuffer;
+	GLuint vertexbuffer[2];
 	// 버퍼를 생성
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glGenBuffers(2, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
 	// 버텍스들을 OpenGL로
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_positions), vertex_positions, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexbuffer[1]);
+	// 버텍스들을 OpenGL로
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vertex_indices), vertex_indices, GL_STATIC_DRAW);
 
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
-
 	glUseProgram(programID);
 	
-	glfwGetTime();
+	GLint loc = glGetUniformLocation(programID, "mvp_matrix");
+
+	float aspect = (float)width / (float)height;
+	
+	glm::mat4 perspect = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 1000.0f);
 
 	do
 	{
+		double t = glfwGetTime();
+		glViewport(0, 0, width, height);
+
 		// drawing
 		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+		static const GLfloat one = 1.0f;
 		glClearBufferfv(GL_COLOR, 0, blue);
+		glClearBufferfv(GL_DEPTH, 0, &one);
+
 		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexbuffer[1]);
 
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute).
@@ -202,8 +244,15 @@ int main()
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
 
+		float f = (float)t * 0.3f;
+		glm::mat4 translationMat = glm::rotate(glm::mat4(1.f), (float)t * 0.3f, glm::vec3(1.0f, 0.0f, 0.0f));
+		translationMat = glm::rotate(glm::mat4(1.f), (float)t * 0.8f, glm::vec3(0.0f, 1.0f, 0.0f)) * translationMat;
+		translationMat = glm::translate(glm::mat4(1.f), glm::vec3(sinf(2.1f * f) * 0.5f, cosf(1.7f * f) * 0.5f, sinf(1.3f * f) * cosf(1.5f * f) * 2.0f)) *translationMat;
+		translationMat = glm::translate(glm::mat4(1.f), glm::vec3(0.0f, 0.0f, -4.0f)) * translationMat;
+		glm::mat4 mv_matrix = perspect * translationMat;
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &mv_matrix[0][0]);
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
 		glDisableVertexAttribArray(0);
 
 		// swap buffer

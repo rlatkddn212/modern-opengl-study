@@ -116,6 +116,7 @@ Map Buffer Object 예제 C05_MapBuffer
     - 여러개의 배열 point, uv, normal이 독립적으로 있을 때
   - array of structure
     - point, uv, normal 값이 구조체로 저장된 배열 일 때  
+  - array of structure로 데이터를 구성하는게 정점 데이터가 인접해 있기 때문에 훨씬 빠르다.
 
 
 
@@ -127,6 +128,13 @@ Map Buffer Object 예제 C05_MapBuffer
 
 
 쉐이더에 속성값 전달 예제 C05_Attrib
+
+![1560486419339](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560486419339.png)
+
+- 정점 속성에 color를 추가하고 SOA(structure of array), AOS 두가지 방법을 비교하여 구현하였다.
+
+- 코드에 #define SOA 을 사용하여 선택 가능
+  - #define SOA 삭제 하면 AOS로 동작한다.
 
 
 
@@ -208,6 +216,12 @@ layout (std140) uniform ExampleBlock
 #### 유니폼을 사용한 지오메트리 변환
 
 예제 프로그램 C05_Uniform
+
+![1560492060531](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560492060531.png)
+
+1) glGetUniformLocation를 통해 쉐이더에 유니폼 위치를 찾는다.
+
+2) glUniform*로 유니폼을 채운다.
 
 
 

@@ -154,6 +154,8 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath)
 	return ProgramID;
 }
 
+#define SOA
+
 int main()
 {
 	initGLFW();
@@ -163,6 +165,8 @@ int main()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
+	// structure of array
+#ifdef SOA
 	static const GLfloat g_vertex_buffer_data[] =
 	{
 		-0.5f, -0.5f, 0.0f,
@@ -171,7 +175,44 @@ int main()
 		0.5f,  0.5f, 0.0f,
 	};
 
+	static const GLfloat g_color_data[] =
+	{
+		1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f, 1.0f,
+	};
+
+	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
+	glUseProgram(programID);
+
 	// 버텍스 버퍼에 핸들
+	GLuint vertexbuffer[2];
+	// 버퍼를 생성
+	glGenBuffers(2, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
+	// 버텍스들을 버퍼로 이동
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	// 컬러 버퍼 생성
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+	// 버텍스 컬러들을 버퍼로 이동
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_data), g_color_data, GL_STATIC_DRAW);
+#else
+	static const GLfloat g_vertex_buffer_data[] =
+	{
+		-0.5f, -0.5f, 0.0f, // v0
+		1.0f, 1.0f, 1.0f, 1.0f,// c0
+		0.5f, -0.5f, 0.0f, // v1
+		1.0f, 0.0f, 0.0f, 1.0f,// c1
+		-0.5f,  0.5f, 0.0f, // v2
+		0.0f, 0.0f, 1.0f, 1.0f,// c2
+		0.5f,  0.5f, 0.0f, // v3
+		0.0f, 1.0f, 0.0f, 1.0f,// c3
+	};
+
+	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
+	glUseProgram(programID);
 	GLuint vertexbuffer;
 	// 버퍼를 생성
 	glGenBuffers(1, &vertexbuffer);
@@ -179,19 +220,17 @@ int main()
 	// 버텍스들을 OpenGL로
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
-
-	glUseProgram(programID);
-	
-	glfwGetTime();
+#endif
 
 	do
 	{
 		// drawing
 		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, blue);
+
+#ifdef SOA
 		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
 
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute).
@@ -201,11 +240,50 @@ int main()
 			0,                  // 다음 요소 까지 간격(stride)
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
-
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(
+			1,                  // 0번째 속성(attribute).
+			4,                  // 크기(size)
+			GL_FLOAT,           // 타입(type)
+			GL_FALSE,           // 정규화(normalized)?
+			0,                  // 다음 요소 까지 간격(stride)
+			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+		);
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+#else
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		GLint offset = 0;
+
+		glVertexAttribPointer(
+			0,                  // 0번째 속성(attribute).
+			3,                  // 크기(size)
+			GL_FLOAT,           // 타입(type)
+			GL_FALSE,           // 정규화(normalized)?
+			sizeof(GLfloat) * 7,                  // 다음 요소 까지 간격(stride)
+			(void*)offset            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+		);
+
+		offset = sizeof(GLfloat) * 3;
+		glVertexAttribPointer(
+			1,                  // 0번째 속성(attribute).
+			4,                  // 크기(size)
+			GL_FLOAT,           // 타입(type)
+			GL_FALSE,           // 정규화(normalized)?
+			sizeof(GLfloat) * 7,                  // 다음 요소 까지 간격(stride)
+			(void*)offset            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+		);
+
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+#endif
 		// swap buffer
 		glfwSwapBuffers(window);
 		glfwPollEvents();

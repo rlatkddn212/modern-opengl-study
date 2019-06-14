@@ -1,7 +1,12 @@
 #version 430 core
 out vec4 color;
 
+in VERTEX_OUT
+{
+	vec4 color;
+}frg_in;
+
 void main()
 {
-		color = vec4(0.0, 0.8, 1.0, 1.0);
+	color = frg_in.color;
 }
