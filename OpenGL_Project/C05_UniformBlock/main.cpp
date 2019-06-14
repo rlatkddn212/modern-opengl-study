@@ -214,11 +214,9 @@ int main()
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
 	glUseProgram(programID);
 
+	// 블록과 쉐이더 블록간에 binding 을 한다.
 	GLuint matrices = glGetUniformBlockIndex(programID, "Matrices");
-	// glBindBufferBase(GL_UNIFORM_BUFFER, 2, uboExampleBlock);
-
 	glUniformBlockBinding(programID, matrices, 0);
-
 
 	unsigned int uboMatrices;
 	glGenBuffers(1, &uboMatrices);
@@ -229,15 +227,12 @@ int main()
 
 	glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(glm::mat4));
 
-
 	float aspect = (float)width / (float)height;
 
 	glm::mat4 perspectMat = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 1000.0f);
 	glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
 	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), &perspectMat[0][0]);
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-
 
 	do
 	{

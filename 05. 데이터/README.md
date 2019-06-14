@@ -229,13 +229,16 @@ layout (std140) uniform ExampleBlock
 
 [함수]
 
+- glBindBufferBase, glBindBufferRange
+  - 바인딩 포인터에 버퍼를 할당한다.
+
 - glGetUniformBlockIndex
   - 설명 : 유니폼 블록의 인덱스를 찾아 리턴 받는다.
   - GLuint program : 쉐이더 프로그램 id
   - const GLchar* uniformBlockName : 쉐이더에 정의한 유니폼 블록의 이름
 
 - glUniformBlockBinding
-  - 설명 : 유니폼 블록에 할당하는 함수
+  - 설명 : 유니폼 블록에 바인딩 포인터를 할당하는 함수
   - GLuint program : 변경할 유니폼 블록의 쉐이더 프로그램
   - GLuint uniformBlockIndex : glGetUniformBlockIndex 통해 얻은 인덱스
   - GLuint uniformBlockBinding : 바인딩 포인트에 대한 인덱스
