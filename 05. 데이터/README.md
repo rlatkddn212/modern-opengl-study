@@ -278,6 +278,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 ### 쉐이더 스토리지 블록
 
+- OpenGL 4.3 버전 부터 사용된다.
 - 쉐이더 스토리지 블록을 사용하면 유니폼 블록과 다르게 쉐이더에서 쓰기 공간으로사용할 수 있음
 - write 가 가능 해지므로 아토믹 연산이 필요해진다.
   - 쉐이더 코드가 병렬처리로 동작하기 때문에 쓰기 동작의 경우 레이스 컨디션, 명령어 정렬 문제가 생길 수 있다.
@@ -294,7 +295,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 - 버퍼 객체를 생성할 때 GL_ATOMIC_COUNTER_BUFFER로 생성한다.
 
-쉐이더 스토리지, 어토믹 카운터 예제 C05_ShaderStorage
+- 쉐이더 스토리지, 어토믹 카운터 예제는 좀 더 뒤 챕터에서 다루는게 좋을 것 같다.
 
 
 
@@ -311,9 +312,13 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 [함수]
 
 - glGenTextures
+  - 텍스쳐 이름을 생성한다.
 - glBindTexture
+  - 텍스처를 OpenGL 컨텍스트에 바인드한다.
 - glTexStorage2D
+  - 저장소 크기를 지정한다.
 - glTexSubImage2D
+  - 이미지를 텍스쳐에 저장한다.
 
 
 
@@ -347,6 +352,9 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 #### 파일에서 텍스쳐 로딩
 
 - 텍스쳐 로딩 예제 C05_TextureLoading
+- KTX 포맷을 읽어보자.
+
+<https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/#1>
 
 
 
