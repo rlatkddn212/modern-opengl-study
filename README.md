@@ -27,7 +27,7 @@ GLFW, GLM, GLEW, stb_image 입니다.
 | 02. 나의 첫 번째 OpenGL 프로그램 | 완료 | [C02_FirstProgram](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C02_FirstProgram) |
 | 03. 파이프라인 따라가기. 파이프라인 따라가기) | 완료 | [C03_DataTransfer](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_DataTransfer) [C03_Tessellation](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_Tessellation) |
 | 04. 3D 그래픽스를 위한 수학 | 완료 | [C04_Line](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Line) [C04_Matrix](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Matrix) [C04_Vector](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Vector) |
-| 05. 데이터 | 완료 | [C05_Buffer](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Buffer) [C05_MapBuffer](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MapBuffer) 나머지 진행중 |
+| 05. 데이터 | 완료 | [C05_Buffer](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Buffer) [C05_MapBuffer](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MapBuffer)[C05_TextureLoading](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureLoading) [C05_MultiTexture](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MultiTexture) [C05_TextureMipmap](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureMipmap)나머지 진행중 |
 | 06. 쉐이더와 프로그램 | 진행중 |  |
 | 07. 버텍스 프로세싱 및 드로잉 커맨드 |  |  |
 | 08. 프리미티브 프로세싱 |  |  |
