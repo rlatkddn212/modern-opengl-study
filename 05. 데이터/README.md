@@ -430,7 +430,7 @@ GL_LINEAR : 선형 필터링
 
 여러장의 텍스처를 사용하는 예제 C05_MultiTexture
 
-![1561741368436](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1561741368436.png)
+![1561741368436](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561741368436.png)
 
 
 
