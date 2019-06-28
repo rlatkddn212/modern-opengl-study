@@ -19,4 +19,17 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Image.glsl">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="vertex.glsl">
+      <Filter>소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stb_image.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
