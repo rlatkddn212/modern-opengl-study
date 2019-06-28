@@ -214,7 +214,7 @@ int main()
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
 	glUseProgram(programID);
 
-	// 블록과 쉐이더 블록간에 binding 을 한다.
+	// 블록과 쉐이더 binding 을 한다.
 	GLuint matrices = glGetUniformBlockIndex(programID, "Matrices");
 	glUniformBlockBinding(programID, matrices, 0);
 

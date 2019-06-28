@@ -1,7 +1,3 @@
-// OpenGL 빌드 템플릿 입니다.
-// http://www.opengl-tutorial.org 을 참고 했습니다.
-
-
 #pragma warning(disable:4996)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32.lib")
@@ -17,6 +13,8 @@
 #include <sstream>
 #include <vector>
 #include <time.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 using namespace std;
 
 GLFWwindow* window;
@@ -165,34 +163,93 @@ int main()
 
 	static const GLfloat g_vertex_buffer_data[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		1.0f,  1.0f, 0.0f,
+	};
+	static const GLfloat g_uv_buffer_data[] =
+	{
+		0.0, 1.0,
+		1.0, 1.0,
+		0.0, 0.0,
+		1.0, 0.0,
 	};
 
 	// 버텍스 버퍼에 핸들
-	GLuint vertexbuffer;
+	GLuint vertexbuffer[2];
 	// 버퍼를 생성
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glGenBuffers(2, &vertexbuffer[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
 	// 버텍스들을 OpenGL로
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+	// 버텍스들을 OpenGL로
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
+	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
 	glUseProgram(programID);
 	
-	glfwGetTime();
+	GLuint textureID[2];
+	glGenTextures(1, &textureID[0]);
 
+	{
+		int x, y, d;
+		unsigned char* texData = stbi_load("matrix.png", &x, &y, &d, 0);
+		if (!texData)
+		{
+			return false;
+		}
+		glBindTexture(GL_TEXTURE_2D, textureID[0]);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		stbi_image_free(texData);
+	}
+
+	{
+		int x, y, d;
+		unsigned char* texData = stbi_load("kart.png", &x, &y, &d, 0);
+		if (!texData)
+		{
+			return false;
+		}
+		glBindTexture(GL_TEXTURE_2D, textureID[1]);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, x, y, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		stbi_image_free(texData);
+	}
+	
 	do
 	{
 		// drawing
 		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, blue);
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureID[0]);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, textureID[1]);
+
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
+		
 		glVertexAttribPointer(
 			0,                  // 0번째 속성(attribute).
 			3,                  // 크기(size)
@@ -202,8 +259,20 @@ int main()
 			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
 		);
 
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+
+		glVertexAttribPointer(
+			1,                  // 0번째 속성(attribute).
+			2,                  // 크기(size)
+			GL_FLOAT,           // 타입(type)
+			GL_FALSE,           // 정규화(normalized)?
+			0,                  // 다음 요소 까지 간격(stride)
+			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+		);
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(0);
 
 		// swap buffer

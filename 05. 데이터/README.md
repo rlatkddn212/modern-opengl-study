@@ -129,7 +129,7 @@ Map Buffer Object 예제 C05_MapBuffer
 
 쉐이더에 속성값 전달 예제 C05_Attrib
 
-![1560486419339](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560486419339.png)
+![1560486419339](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560486419339.png)
 
 - 정점 속성에 color를 추가하고 SOA(structure of array), AOS 두가지 방법을 비교하여 구현하였다.
 
@@ -260,7 +260,7 @@ layout (std140) uniform ExampleBlock
 
 예제 프로그램 C05_Uniform
 
-![1560492060531](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1560492060531.png)
+![1560492060531](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560492060531.png)
 
 1) glGetUniformLocation를 통해 쉐이더에 유니폼 위치를 찾는다.
 
@@ -344,7 +344,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 - 셰이더에서 유니폼 타입으로 셈플러 변수를 생성하면 텍스처를 읽을 수 있다.
 - 위 텍스쳐 타겟에 대응되는 샘플러 변수가 있다.
-  - ex) GL_TEXTURE_2D => sampler2D
+  - ex) GL_TEXTURE_2D 일 경우 쉐이더 프로그램에서는 sampler2D를 사용한다.
 - 쉐이더에서 텍스처를 읽으려면 texelFetch라는 내장함수를 이용한다.
 
 
@@ -352,9 +352,15 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 #### 파일에서 텍스쳐 로딩
 
 - 텍스쳐 로딩 예제 C05_TextureLoading
-- KTX 포맷을 읽어보자.
+  - 직접 텍스쳐를 파싱하려 했지만 그냥 stb_image라는 오픈 소스를 활용했다.
+  - stb_image는 JPG, PNG, TGA, BMP, PSD, GIF, HDR, PIC 이미지 파일 포맷을 읽을 수 있다.
+- KTX 포맷을 읽어보자. 
 
 <https://www.khronos.org/opengles/sdk/tools/KTX/file_format_spec/#1>
+
+- KTX 포맷 읽기.md 파일에 정리해두었다.
+
+![1561731942232](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561731942232.png)
 
 
 
@@ -368,6 +374,28 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 
 
+GL_REPEAT : uv 값이 1 초과 될 경우 반복해서 이미지를 출력
+
+![1561732444075](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561732444075.png)
+
+GL_MIRRORED_REPEAT :  uv 값이 1 초과 될 경우 거울처럼 반사되어 이미지를 출력
+
+![1561732385492](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561732385492.png)
+
+
+
+GL_CLAMP_TO_EDGE :  uv 값이 1 초과 될 경우 초과되기전 마지막 픽셀로 채운다.
+
+![1561732358058](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561732358058.png)
+
+GL_CLAMP_TO_BORDER : glTextureParameterfv()에 지정한 값으로 채운다.
+
+- ex) glTextureParameterfv(textureID, GL_TEXTURE_BORDER_COLOR, red);
+
+![1561732334955](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561732334955.png)
+
+
+
 - 필터링 모드
   - 늘어나거나 줄어든 텍스처 맵으로부터 컬러 프래그먼트를 계산한다.
   - 인접 필터링, 선형 필터링이 있다. 선형 필터링의 경우 보간된 이미지가 사용된다.
@@ -375,21 +403,34 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 필터링 예제 C05_TextureFiltering
 
+GL_NEAREST : 인접 필터링
+
+GL_LINEAR : 선형 필터링
+
 
 
 - 샘플러 객체
+  
+  - 텍스쳐 객체와 샘플러 객체는 비슷하다. 차이점이 있다면 하나의 택스쳐를 사용할 때 여러개의 래핑모드와 필터링 모드를 사용하려면 텍스쳐를 하나 더 생성해야한다. 그렇게 하는 것보다 샘플러 객체를 여러개 만들어서 사용하는 것이 성능상 이점이 된다.
+  
   - 하나이상의 샘플러 객체를 읽기 위해선 glGenSamplers를 호출한다.
+  
+  
 
 샘플러 예제 C05_TextureSampling
 
 
 
 - 여러 텍스처 사용
-  - glGetIntegerv 함수를 사용하여 여러장의 텍스처를 쉐이더 스테이지에서 사용할 수 있다.
-
-
+  
+  - glGetIntegerv 함수에 GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS를 인자로 넣어주면 최대 몇장의 텍스쳐를 동시에 사용할 수 있는지 알 수 있다.
+  - 활성화된 택스쳐를 변경하려면 glActiveTexture 함수를 통해 변경할 수 있다.
+  
+  
 
 여러장의 텍스처를 사용하는 예제 C05_MultiTexture
+
+![1561741368436](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1561741368436.png)
 
 
 
@@ -402,7 +443,25 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
   - glGenerateMipmap으로 텍스쳐 밉맵을 생성할 수 있다.
     - 하지만 미리 만들어진 밉맵을 로딩하는데 훨씬 빠르다.
 
+![img](https://upload.wikimedia.org/wikipedia/commons/5/5c/MipMap_Example_STS101.jpg)
+
+
+
 밉맵 예제 C05_TextureMipmap
+
+
+
+밉맵 사용하지 않을 경우
+
+![1561749893580](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561749893580.png)
+
+
+
+밉맵 사용할 경우
+
+![1561749844118](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561749844118.png)
+
+거리가 멀 경우 작은 이미지 사이즈를 사용하므로 더 깔끔하게 보인다.
 
 
 
@@ -421,7 +480,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 
 
-배열 텍스쳐 예제 C05_ArrayTexture
+배열 텍스쳐 예제 C05_ArrayTexture (TODO)
 
 
 
@@ -449,7 +508,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 
 
-이미지를 저장하는 예제 C05_ImageStore
+이미지를 저장하는 예제 C05_ImageStore (TODO)
 
 
 
