@@ -52,13 +52,51 @@
 
 
 
+#### 베이스 버텍스
+
+- glDrawElementsBaseVertex()
+
+
+
+#### 프리미티브 재시작
+
+
+
+베이스 버텍스, 프리미티브 재시작 예제 C07_PrimitiveRestart
+
+
+
+#### 인스턴스
+
+- glDrawArraysInstanced
+- glDrawElementsInstanced
+
+
+
+인스턴스 예제 C07_InstancedModel
+
+
+
+#### indirect Draw
+
+- Draw 할 때 필요한 인자를 미리 저장해 두거나 인자를 실시간으로 생성하여 변경할 수 있는 방법
+- glDrawElements
+
 
 
 
 
 --------------------
 
-### 변환된 버텍스 저장하기
+### 변환된 버텍스
+
+
+
+#### 변환 피드백
+
+
+
+변환 피드백 예제 C07_TransformFeedBack
 
 
 
@@ -68,4 +106,17 @@
 
 
 
+#### 사용자 정의 클리핑
+
+
+
+내장 변수 gl_ClipDistance[]를 사용하여 클립 거리 값을 사용가능
+
+
+
+사용자 정의 클리핑 예제 C07_ClipDistance
+
+
+
 ------------------
+

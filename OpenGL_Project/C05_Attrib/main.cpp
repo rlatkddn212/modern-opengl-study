@@ -1,7 +1,3 @@
-// OpenGL 빌드 템플릿 입니다.
-// http://www.opengl-tutorial.org 을 참고 했습니다.
-
-
 #pragma warning(disable:4996)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32.lib")
