@@ -480,7 +480,11 @@ GL_LINEAR : 선형 필터링
 
 
 
-배열 텍스쳐 예제 C05_ArrayTexture (TODO)
+배열 텍스쳐 예제 C05_ArrayTexture
+
+![1561828431526](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1561828431526.png)
+
+https://ferransole.wordpress.com/2014/06/09/array-textures/ 에 예제를 참고해서 구현해봤다.
 
 
 

@@ -6,6 +6,8 @@
 
 #include <GL/glew.h>	
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -16,6 +18,8 @@
 using namespace std;
 
 GLFWwindow* window;
+GLuint width;
+GLuint height;
 
 void initGLFW()
 {
@@ -32,8 +36,11 @@ void initGLFW()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	width = 1024;
+	height = 768;
+
 	// window 생성
-	window = glfwCreateWindow(1024, 768, "OpenGL", NULL, NULL);
+	window = glfwCreateWindow(width, height, "OpenGL", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -155,52 +162,140 @@ int main()
 	initGLFW();
 	initGLEW();
 
+	//glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
 	static const GLfloat g_vertex_buffer_data[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		1.0f,  1.0f, 0.0f,
+	};
+	static const GLfloat g_uv_buffer_data[] =
+	{
+		0.0, 1.0,
+		1.0, 1.0,
+		0.0, 0.0,
+		1.0, 0.0,
 	};
 
 	// 버텍스 버퍼에 핸들
-	GLuint vertexbuffer;
+	GLuint vertexbuffer[2];
 	// 버퍼를 생성
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glGenBuffers(2, &vertexbuffer[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
 	// 버텍스들을 OpenGL로
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+	// 버텍스들을 OpenGL로
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
-
 	glUseProgram(programID);
-	
-	glfwGetTime();
 
-	do
+	GLuint textureID;
+
+	glGenTextures(1, &textureID);
 	{
-		// drawing
-		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, blue);
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, textureID);
 
-		glVertexAttribPointer(
-			0,                  // 0번째 속성(attribute).
-			3,                  // 크기(size)
-			GL_FLOAT,           // 타입(type)
-			GL_FALSE,           // 정규화(normalized)?
-			0,                  // 다음 요소 까지 간격(stride)
-			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+		//Create storage for the texture. (100 layers of 1x1 texels)
+		glTexStorage3D(GL_TEXTURE_2D_ARRAY,
+			1,                    //No mipmaps as textures are 1x1
+			GL_RGB8,              //Internal format
+			1, 1,                 //width,height
+			100                   //Number of layers
 		);
 
+		for (unsigned int i = 0; i != 100; ++i)
+		{
+			//Choose a random color for the i-essim image
+			GLubyte color[3] = { rand() % 255,rand() % 255,rand() % 255 };
 
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glDisableVertexAttribArray(0);
+			//Specify i-essim image
+			glTexSubImage3D(GL_TEXTURE_2D_ARRAY,
+				0,                     //Mipmap number
+				0, 0, i,                 //xoffset, yoffset, zoffset
+				1, 1, 1,                 //width, height, depth
+				GL_RGB,                //format
+				GL_UNSIGNED_BYTE,      //type
+				color);                //pointer to data
+		}
+
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	}
+
+	GLint loc = glGetUniformLocation(programID, "mvp_matrix");
+	float aspect = (float)width / (float)height;
+	glm::mat4 perspect = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 1000.0f);
+	
+	do
+	{
+		glViewport(0, 0, width, height);
+
+		// drawing
+		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+		static const GLfloat one = 1.0f;
+		glClearBufferfv(GL_COLOR, 0, blue);
+		glClearBufferfv(GL_DEPTH, 0, &one);
+
+		for (int i = 0; i < 10; ++i)
+		{
+			for (int j = 0; j < 10; ++j)
+			{
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D_ARRAY, textureID);
+				
+				glEnableVertexAttribArray(0);
+				glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[0]);
+
+				glVertexAttribPointer(
+					0,                  // 0번째 속성(attribute).
+					3,                  // 크기(size)
+					GL_FLOAT,           // 타입(type)
+					GL_FALSE,           // 정규화(normalized)?
+					0,                  // 다음 요소 까지 간격(stride)
+					(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+				);
+
+				glEnableVertexAttribArray(1);
+				glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer[1]);
+
+				glVertexAttribPointer(
+					1,                  // 0번째 속성(attribute).
+					2,                  // 크기(size)
+					GL_FLOAT,           // 타입(type)
+					GL_FALSE,           // 정규화(normalized)?
+					0,                  // 다음 요소 까지 간격(stride)
+					(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
+				);
+
+				GLuint texloc = glGetUniformLocation(programID, "layer");
+				glUniform1i(texloc, i * 10 + j);
+
+				glm::mat4 mvpMat = glm::mat4(1.0f);
+				mvpMat = glm::translate(mvpMat, glm::vec3(-5.0f + i, -5.0f + j, -20.0f));
+				//mvpMat = glm::rotate(mvpMat, glm::radians(50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+				mvpMat = glm::scale(mvpMat, glm::vec3(0.2f, 0.2f, 0.2f));
+				mvpMat = perspect * mvpMat;
+				glUniformMatrix4fv(loc, 1, GL_FALSE, &mvpMat[0][0]);
+
+				glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+				glDisableVertexAttribArray(1);
+				glDisableVertexAttribArray(0);
+			}
+		}
 
 		// swap buffer
 		glfwSwapBuffers(window);
