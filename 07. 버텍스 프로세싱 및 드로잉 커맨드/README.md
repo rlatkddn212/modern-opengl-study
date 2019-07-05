@@ -64,24 +64,39 @@
 
 - glDrawElementsBaseVertex()
 
+  - 시작 index 위치를 지정한다.
+
 
 
 #### 프리미티브 재시작
 
+- GL_PRIMITIVE_RESTART를 활성화 시켜 사용한다.
 
-
-베이스 버텍스, 프리미티브 재시작 예제 C07_PrimitiveRestart
+프리미티브 재시작 예제 C07_PrimitiveRestart(TODO)
 
 
 
 #### 인스턴스
 
-- glDrawArraysInstanced
-- glDrawElementsInstanced
+- vertex Array와 index 를 지원한다.
+
+  - glDrawArraysInstanced
+
+  - glDrawElementsInstanced
+
+- vertexshader에 gl_InstanceID로 각 인스턴스를 구분할 수 있다.
+
+- vertex buffer에 데이터를 인스턴스로 사용할 수 있도록 분리해 줄 수 있다.
+
+  - glVertexAttribDivisor 함수를 사용한다.
 
 
 
 인스턴스 예제 C07_InstancedModel
+
+Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문에 Draw Call을 절약할 수 있다.
+
+![1562336322590](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562336322590.png)
 
 
 
@@ -91,6 +106,8 @@
 - glDrawElements
 
 
+
+예제 추가(TODO)
 
 
 
