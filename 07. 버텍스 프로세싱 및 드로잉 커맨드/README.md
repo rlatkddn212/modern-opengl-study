@@ -46,11 +46,19 @@
 - 인덱스된 모델의 경우 GL_ELEMNET_ARRAY_BUFFER로 인덱스 데이터를 바인딩해야한다.
 - 그리고 드로우 커맨드는 glDrawElements를 사용한다.
 
-
-
 인덱스 예제 C07_DrawIndexedModel
 
+이 예제는 Object 파일을 읽어서 사용한다. 
 
+초보시절 만들었던 Object를 열었다. meshlab으로 열면 다음과 같이 보인다.
+
+- (노멀 값이 잘못되어 오류가 있다. 실제로 파일을 열어 보면 normal 값이 들어 있지 않은데 이는 모든 오브젝트가 ccw로 구성되지 않았기 때문이다.)
+
+![1562325330911](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562325330911.png)
+
+예제를 실행시키면 아래와 같이 랜더링 된다. ObjModel.cpp에서 Obj파일에 기본적인 정보만 읽고 있는데 그 소스파일을 분석하면 어떤식으로 모델을 읽게 되는지 알 수 있다.
+
+![](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562325265481.png)
 
 #### 베이스 버텍스
 

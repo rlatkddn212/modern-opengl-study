@@ -13,9 +13,15 @@
 #include <sstream>
 #include <vector>
 #include <time.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include "ObjModel.h"
+
 using namespace std;
 
 GLFWwindow* window;
+GLint width;
+GLint height;
 
 void initGLFW()
 {
@@ -33,7 +39,9 @@ void initGLFW()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// window 생성
-	window = glfwCreateWindow(1024, 768, "OpenGL", NULL, NULL);
+	width = 1024;
+	height = 768;
+	window = glfwCreateWindow(width, height, "OpenGL", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -155,61 +163,36 @@ int main()
 	initGLFW();
 	initGLEW();
 
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
+	//glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 
-	// 사각형
-	static const GLfloat g_vertex_buffer_data[] =
-	{
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
-	};
-
-	// subData 로 평행 사변형 꼴로 변경시킴
-	static const GLfloat g_vertex_buffer_data2[] =
-	{
-		-1.0f, 0.5f, 0.0f,
-		1.0f, 0.5f, 0.0f
-	};
-
-	// 버텍스 버퍼에 핸들
-	GLuint vertexbuffer;
-	// 버퍼를 생성
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	// 버텍스들을 OpenGL로
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-	// 일부 버퍼 데이터를 변경
-	glBufferSubData(GL_ARRAY_BUFFER, 24, sizeof(g_vertex_buffer_data2), g_vertex_buffer_data2);
 	GLuint programID = LoadShaders("vertex.glsl", "Image.glsl");
-
 	glUseProgram(programID);
-	
-	glfwGetTime();
+
+	GLint loc = glGetUniformLocation(programID, "mvp_matrix");
+
+	float aspect = (float)width / (float)height;
+	glm::mat4 perspect = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 1000.0f);
+	glm::mat4 view = glm::lookAt(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	ObjModel model;
+	model.LoadModel("Dice.obj");
 
 	do
 	{
+		glViewport(0, 0, width, height);
+
 		// drawing
-		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, blue);
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		static const GLfloat black[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		static const GLfloat one = 1.0f;
+		glClearBufferfv(GL_COLOR, 0, black);
+		glClearBufferfv(GL_DEPTH, 0, &one);
 
-		glVertexAttribPointer(
-			0,                  // 0번째 속성(attribute).
-			3,                  // 크기(size)
-			GL_FLOAT,           // 타입(type)
-			GL_FALSE,           // 정규화(normalized)?
-			0,                  // 다음 요소 까지 간격(stride)
-			(void*)0            // 배열 버퍼의 오프셋(offset; 옮기는 값)
-		);
-
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glDisableVertexAttribArray(0);
+		glm::mat4 translationMat = glm::translate(glm::mat4(1.f), glm::vec3(0.0f, 0.0f, -2.0f));
+		translationMat = glm::scale(translationMat, glm::vec3(0.01f, 0.01f, 0.01f));
+		glm::mat4 mv_matrix = perspect * view * translationMat;
+		model.UseTexture();
+		model.RenderModel(loc, mv_matrix);
 
 		// swap buffer
 		glfwSwapBuffers(window);
