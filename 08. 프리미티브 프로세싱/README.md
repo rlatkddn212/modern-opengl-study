@@ -27,7 +27,11 @@
 
 테셀레이션 예제 C08_TessellationTerrain
 
+
+
 C08_TessellationBezierSurface
+
+
 
 ---------------
 
@@ -37,9 +41,15 @@ C08_TessellationBezierSurface
 
 예제 삼각형 폐기 하기 C08_GeometryShaderDiscard
 
+
+
 예제 모델 폭파시키기 C08_GeometryShaderExplosion
 
+
+
 예제 새로운 지오메트리 생성하기 C08_GeometryShaderMakeObj
+
+
 
 예제 모델에 법선 출력하기 C08_GeometryShaderNormal
 
@@ -54,10 +64,6 @@ C08_TessellationBezierSurface
 
 
 #### 사각형 랜더링
-
-
-
-#### 
 
 
 
