@@ -54,11 +54,11 @@
 
 - (노멀 값이 잘못되어 오류가 있다. 실제로 파일을 열어 보면 normal 값이 들어 있지 않은데 이는 모든 오브젝트가 ccw로 구성되지 않았기 때문이다.)
 
-![1562325330911](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562325330911.png)
+![1562325330911](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1562325330911.png)
 
 예제를 실행시키면 아래와 같이 랜더링 된다. ObjModel.cpp에서 Obj파일에 기본적인 정보만 읽고 있는데 그 소스파일을 분석하면 어떤식으로 모델을 읽게 되는지 알 수 있다.
 
-![](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562325265481.png)
+![1562325265481](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1562325265481.png)
 
 #### 베이스 버텍스
 
