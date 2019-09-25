@@ -1,12 +1,10 @@
-# 나의 첫번째 OpenGL 프로그램
+# 첫번째 OpenGL 프로그램
 
 - 어플리케이션 작성 방법을 알아본다.
 - 삼각형을 하나 그려본다.
 
 
-
-### 간단한 애플리케이션 작성
-
+## 간단한 애플리케이션 작성
 
 
 - C02_FirstProgram에 소스코드를 작성했다.
@@ -14,7 +12,7 @@
 
 
 
-#### [함수]
+### [함수]
 
 - ClearBufferfv
 
@@ -26,7 +24,7 @@
 
 
 
-### 쉐이더 사용하기
+## 쉐이더 사용하기
 
 - C02_FirstProgram 프로젝트 파일에 쉐이더 파일인 vertex.glsl, Image.glsl 이 들어 있다.
   - 단순히 ifstream를 사용하여 파일을 읽은 후 사용한다.
@@ -41,7 +39,7 @@
 
 
 
-#### [함수]
+### [함수]
 
 - glCreateShader
   - 쉐이더 객체를 생성한다.
@@ -61,14 +59,14 @@
 
 
 
-### 처음 그리는 삼각형
+## 처음 그리는 삼각형
 
 - VBO 생성, 뒤 챕터에서 배우겠지만 그래픽카드안에 vertex를 저장하는 버퍼이다.
 - VAO 생성, VBO와 비슷하다. 뒤 챕터에서 다루게 된다. 사용방법만 봅시다.
 
 
 
-### [함수]
+## [함수]
 
 - glGenVertexArrays
   - VAO를 생성한다.
@@ -81,14 +79,12 @@
 
 
 
-#### <실행 결과>
+### <실행 결과>
 
 ![1559881576469](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1559881576469.png)
 
 
 
-### 참고 자료
+## 참고 자료
 
 <http://www.opengl-tutorial.org/kr/beginners-tutorials/tutorial-2-the-first-triangle/>
-
-꼭 보고 따라해보자.
