@@ -7,7 +7,7 @@
 ## 간단한 애플리케이션 작성
 
 
-- C02_FirstProgram에 소스코드를 작성했다.
+-  [[첫번째 프로젝트]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C02_FirstProgram) 에 소스코드를 작성했다.
   - Release x64로 설정 후 실행해보자.
 
 
