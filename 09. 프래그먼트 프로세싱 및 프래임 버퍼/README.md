@@ -106,7 +106,7 @@
 
 
 
-예제 09_StereoRendering
+예제 C09_StereoRendering
 
 
 
@@ -116,13 +116,13 @@
 
 #### 필터링 효과
 
-예제 09_Filtering
+예제 C09_Filtering
 
 
 
 #### 멀티 샘플링
 
-예제 09_MultiSampling
+예제 C09_MultiSampling
 
 
 

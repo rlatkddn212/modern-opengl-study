@@ -69,7 +69,7 @@ C08_TessellationBezierSurface
 
 C08_GeometryShaderRect
 
-
+gsquads
 
 #### 여러 뷰포트 랜더링
 
@@ -77,7 +77,7 @@ C08_GeometryShaderRect
 
 C08_GeometryShaderViewport
 
-
+gslayered
 
 
 

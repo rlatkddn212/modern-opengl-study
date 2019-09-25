@@ -175,7 +175,7 @@ int main()
 		double time = glfwGetTime();
 
 		// drawing
-		static const GLfloat blue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+		static const GLfloat blue[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		glClearBufferfv(GL_COLOR, 0, blue);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
