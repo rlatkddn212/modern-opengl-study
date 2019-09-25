@@ -4,9 +4,86 @@
 
 ## 프래그먼트 쉐이더
 
+- 레스터라이제이션에 의해 생성된 프래그먼트를 처리한다.
+- 윈도우 공간에 좌표를 가진다.
+- 마지막 정점처리 단계에서 얻어진 정점들이 보간된 값을 가진다.
+- 깊이, 스텐실, 색상 값을 출력으로 얻을 수 있다.
 
 
-### 보간 지시어
+
+폐기 명령에 엑세스 할 수 있다.
+
+프래그먼트의 출력값이 삭제된다.
+
+- fragment 테스트 단계를 프레그먼트 쉐이더 이전에 실행 할 수 있다.
+
+```
+layout(early_fragment_tests) in;
+```
+
+- 이 옵션을 적용한 후 gl_FragDepth에 쓰는걸 시도하면 기록된 값을 무시된다.
+
+
+
+### 빌트인 입력 변수
+
+```
+in vec4 gl_FragCoord;
+in bool gl_FrontFacing;
+in vec2 gl_PointCoord;
+
+in int gl_SampleID;
+in vec2 gl_SamplePosition;
+in int gl_SampleMaskIn[];
+
+in float gl_ClipDistance[];
+in int gl_PrimitiveID;
+
+// 지오메트리 쉐이더에서 레이어를 나눈 경우 사용됨
+in int gl_Layer;
+in int gl_ViewportIndex;
+```
+
+- gl_FragCoord
+
+  - 윈도우 좌표계에서 프래그먼트의 위치값이다. x,y,z 값인데 x,y는 윈도우 좌표고 gl_FragDepth값을 사용하지 않으면 z값이 깊이 버퍼에 기록된다. w값은 마지막 정점 처리단계에서 gl_Position값에 대한 1/클립좌표계 이다.
+
+  - layout(origin_upper_left) in vec4 gl_FragCoord; 를 추가하면 원점 좌표를 지정해 줄 수 있다.
+- gl_FrontFacing
+  - face가 정면일 경우 ture, 후면일 경우 false 값을 가진다.
+- gl_PointCoord
+  - 프리미티브 내에서 0~1 범위에 점의 좌표
+- gl_SampleID
+  - 샘플 식별자
+- gl_SamplePosition
+  - 프래그먼트에 샘플 위치 0~1에 범위 값을 가짐
+- gl_SampleMaskIn
+  - 샘플 마스크에 대한 비트 필드
+- gl_ClipDistance
+  - 보간된 클립 평면
+- gl_PrimitiveID
+  - 프리미티브 식별자
+
+### 출력 변수
+
+```
+out float gl_FragDepth;
+```
+
+ 깊이를 출력할 수 있다.
+
+
+
+### 보간 지시어(Interpolation qualifiers)
+
+- flat
+  - 보간 처리하지 않는다.
+
+- noperspective
+  - 선형적으로 보간된다.
+
+- smooth
+  - 원근법으로 올바르게 보간된다.
 
 
 
