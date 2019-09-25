@@ -22,11 +22,8 @@
 ## OpenGL의 기원과 역사
 
 - 1992년 실리콘 그래픽스 사에서 만든 2, 3차원 표준 API
-
 - 약 250개의 함수 호출을 사용, 모던 opengl은 이 함수들을 직접 사용하지않고 glfw 같은 고수준의 api를 통해 사용된다.
-
 - OpenGL ARB (OpenGL 검수 위원회) 현재는 크로노스 그룹([Khronos Group](https://kr.khronos.org/))
-
   - 크로노스 그룹은 여러 IT 기업들이 참여하고 있는 그룹이다.
 
 
