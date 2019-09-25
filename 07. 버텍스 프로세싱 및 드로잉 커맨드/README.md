@@ -46,7 +46,7 @@
 - 인덱스된 모델의 경우 GL_ELEMNET_ARRAY_BUFFER로 인덱스 데이터를 바인딩해야한다.
 - 그리고 드로우 커맨드는 glDrawElements를 사용한다.
 
-인덱스 예제 C07_DrawIndexedModel
+인덱스 예제 : [[인덱스된 모델 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C07_DrawIndexedModel)
 
 이 예제는 Object 파일을 읽어서 사용한다. 
 
@@ -92,7 +92,7 @@
 
 
 
-인스턴스 예제 C07_InstancedModel
+인스턴스 예제 : [[인스턴스 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C07_InstancedModel)
 
 Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문에 Draw Call을 절약할 수 있다.
 
@@ -121,7 +121,7 @@ Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문�
 
 
 
-변환 피드백 예제 C07_TransformFeedBack
+변환 피드백 예제 : [[변환 피드백 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C07_TransformFeedBack)
 
 - 책에 변환 피드백 예제에서는 스프링 메쉬를 구현한다.
 - 스프링의 경우 후크의 법칙에 의해 아래와 같은 공식이 적용된다.
@@ -148,7 +148,7 @@ Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문�
 
 
 
-사용자 정의 클리핑 예제 C07_ClipDistance
+사용자 정의 클리핑 예제 : [[사용자 정의 클리핑 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C07_ClipDistance)
 
 - 예제는 폴리곤의 일부를 vertexShader에서 클리핑한다.
 
