@@ -22,7 +22,7 @@ GLFW, GLM, GLEW, stb_image 입니다.
 -----------------------
 ### 프로젝트 구성
 | 챕터 | 문서 진행도 | 프로젝트 |
-|---|---|---|
+|---|---|-|
 | 01. 소개 | 완료 | 없음 |
 | 02. 나의 첫 번째 OpenGL 프로그램 | 완료 | [[첫번째 프로젝트]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C02_FirstProgram) |
 | 03. 파이프라인 따라가기. 파이프라인 따라가기) | 완료 | [[3D데이터 이동처리 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_DataTransfer) [[테셀레이션 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_Tessellation) |
