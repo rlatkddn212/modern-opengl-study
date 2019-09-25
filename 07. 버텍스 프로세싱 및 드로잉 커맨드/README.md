@@ -4,11 +4,11 @@
 
 ----------------
 
-### 버텍스 프로세싱
+## 버텍스 프로세싱
 
 
 
-#### 버텍스 쉐이더 입력
+### 버텍스 쉐이더 입력
 
 - 버텍스 쉐이더 이전 버텍스 관련 입력을 구성해야한다.
 - glVertexAttribPointer로 버퍼를 버텍스 쉐이더에 입력으로 연결한다.
@@ -24,7 +24,7 @@
 
 
 
-#### 버텍스 쉐이더 출력
+### 버텍스 쉐이더 출력
 
 - vec4 gl_Position :  변환된 정점의 위치
 
@@ -36,11 +36,11 @@
 
 ----------------
 
-### 드로잉 커맨드
+## 드로잉 커맨드
 
 
 
-#### 인덱스된 모델 드로잉 커맨드
+### 인덱스된 모델 드로잉 커맨드
 
 - glDrawArrays의 경우 인덱스 되지 않은 모델에 대한 드로잉 커맨드이다.
 - 인덱스된 모델의 경우 GL_ELEMNET_ARRAY_BUFFER로 인덱스 데이터를 바인딩해야한다.
@@ -60,7 +60,7 @@
 
 ![1562325265481](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1562325265481.png)
 
-#### 베이스 버텍스
+### 베이스 버텍스
 
 - glDrawElementsBaseVertex()
 
@@ -68,7 +68,7 @@
 
 
 
-#### 프리미티브 재시작
+### 프리미티브 재시작
 
 - GL_PRIMITIVE_RESTART를 활성화 시켜 사용한다.
 
@@ -76,7 +76,7 @@
 
 
 
-#### 인스턴스
+### 인스턴스
 
 - vertex Array와 index 를 지원한다.
 
@@ -96,11 +96,11 @@
 
 Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문에 Draw Call을 절약할 수 있다.
 
-![1562336322590](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562336322590.png)
+![1562336322590](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1562336322590.png)
 
 
 
-#### indirect Draw
+### indirect Draw
 
 - Draw 할 때 필요한 인자를 미리 저장해 두거나 인자를 실시간으로 생성하여 변경할 수 있는 방법
 - glDrawElements
@@ -113,11 +113,11 @@ Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문�
 
 --------------------
 
-### 변환된 버텍스
+## 변환된 버텍스
 
 
 
-#### 변환 피드백
+### 변환 피드백
 
 
 
@@ -134,11 +134,11 @@ Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문�
 
 ---------------------
 
-### 클리핑
+## 클리핑
 
 
 
-#### 사용자 정의 클리핑
+### 사용자 정의 클리핑
 
 - 내장 변수 gl_ClipDistance[]를 사용하여 클립 거리 값을 사용가능
 
@@ -152,7 +152,7 @@ Texture Array와 똑같이 랜더링 되지만 Instance를 추가했기 때문�
 
 - 예제는 폴리곤의 일부를 vertexShader에서 클리핑한다.
 
-![1562405034928](C:\Users\swkim\AppData\Roaming\Typora\typora-user-images\1562405034928.png)
+![1562405034928](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1562405034928.png)
 
 
 
