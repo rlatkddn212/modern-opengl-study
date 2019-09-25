@@ -24,10 +24,10 @@ GLFW, GLM, GLEW, stb_image 입니다.
 | 챕터 | 문서 진행도 | 프로젝트 |
 |---|---|---|
 | 01. 소개 | 완료 | 없음 |
-| 02. 나의 첫 번째 OpenGL 프로그램 | 완료 | [첫번째 프로젝트](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C02_FirstProgram) |
-| 03. 파이프라인 따라가기. 파이프라인 따라가기) | 완료 | [3D데이터 이동처리 예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_DataTransfer) [테셀레이션 예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_Tessellation) |
-| 04. 3D 그래픽스를 위한 수학 | 완료 | [베지어 곡선 그리기](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Line) [GLM 행렬 예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Matrix) [GLM 벡터 예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Vector) |
-| 05. 데이터 | 완료 | [OpenGL 버퍼예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Buffer)   [Map 버퍼 예제](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MapBuffer)  [[텍스쳐 로드 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureLoading)   [[멀티 텍스쳐 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MultiTexture)   [[텍스쳐 밉맵 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureMipmap)   |
+| 02. 나의 첫 번째 OpenGL 프로그램 | 완료 | [[첫번째 프로젝트]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C02_FirstProgram) |
+| 03. 파이프라인 따라가기. 파이프라인 따라가기) | 완료 | [[3D데이터 이동처리 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_DataTransfer) [[테셀레이션 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C03_Tessellation) |
+| 04. 3D 그래픽스를 위한 수학 | 완료 | [[베지어 곡선 그리기]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Line) [[GLM 행렬 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Matrix) [[GLM 벡터 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C04_Vector) |
+| 05. 데이터 | 완료 | [[OpenGL 버퍼예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Buffer)   [[Map 버퍼 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MapBuffer)  [[텍스쳐 로드 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureLoading)   [[멀티 텍스쳐 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MultiTexture)   [[텍스쳐 밉맵 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureMipmap)   |
 | 06. 쉐이더와 프로그램 | 완료 |  |
 | 07. 버텍스 프로세싱 및 드로잉 커맨드 | 완료 |  |
 | 08. 프리미티브 프로세싱 |  |  |
