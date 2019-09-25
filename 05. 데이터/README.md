@@ -127,7 +127,7 @@ Map Buffer Object 예제 C05_MapBuffer
 
 
 
-쉐이더에 속성값 전달 예제 C05_Attrib
+쉐이더에 속성값 전달 예제 : [[쉐이더 속성값 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Attrib)
 
 ![1560486419339](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560486419339.png)
 
@@ -258,7 +258,7 @@ layout (std140) uniform ExampleBlock
 
 #### 유니폼을 사용한 지오메트리 변환
 
-예제 프로그램 C05_Uniform
+예제 프로그램 : [[유니폼 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_Uniform)
 
 ![1560492060531](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1560492060531.png)
 
@@ -268,7 +268,7 @@ layout (std140) uniform ExampleBlock
 
 
 
-C05_UniformBlock 예제
+예제 : [[유니폼 블록 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_UniformBlock) 
 
 C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. 버퍼의 데이터는 glBufferSubData를 통해 변경하도록 구현했다.
 
@@ -351,7 +351,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
 
 #### 파일에서 텍스쳐 로딩
 
-- 텍스쳐 로딩 예제 C05_TextureLoading
+- 텍스쳐 로딩 예제 : [[텍스쳐 로드 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureLoading)  
   - 직접 텍스쳐를 파싱하려 했지만 그냥 stb_image라는 오픈 소스를 활용했다.
   - stb_image는 JPG, PNG, TGA, BMP, PSD, GIF, HDR, PIC 이미지 파일 포맷을 읽을 수 있다.
 - KTX 포맷을 읽어보자. 
@@ -370,7 +370,7 @@ C05_Uniform과 동일한 프로그램이지만 Uniform Block을 사용한다. �
   - 텍스쳐 좌표는 0~1사이로 지정되지만 uv값은 1이 넘는 값이 들어 올 수 있다.
   - 래핑 모드는 정규화된 좌표를 넘어갈 때 그 좌표를 어떻게 처리할지 선택하는 방법이다.
 
-래핑 모드 예제 C05_TextureWrapping
+래핑 모드 예제 : [[텍스쳐 래핑 모드 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureWrapping)  
 
 
 
@@ -401,7 +401,7 @@ GL_CLAMP_TO_BORDER : glTextureParameterfv()에 지정한 값으로 채운다.
   - 인접 필터링, 선형 필터링이 있다. 선형 필터링의 경우 보간된 이미지가 사용된다.
   - 쉐이더에 texture() 함수를 사용
 
-필터링 예제 C05_TextureFiltering
+필터링 예제 : [[텍스쳐 필터링 모드 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureFiltering) 
 
 GL_NEAREST : 인접 필터링
 
@@ -417,7 +417,7 @@ GL_LINEAR : 선형 필터링
   
   
 
-샘플러 예제 C05_TextureSampling
+샘플러 예제 [[텍스쳐 샘플러 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureSampling)  
 
 
 
@@ -428,7 +428,7 @@ GL_LINEAR : 선형 필터링
   
   
 
-여러장의 텍스처를 사용하는 예제 C05_MultiTexture
+여러장의 텍스처를 사용하는 예제 : [[멀티 텍스쳐 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_MultiTexture) 
 
 ![1561741368436](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561741368436.png)
 
@@ -447,7 +447,7 @@ GL_LINEAR : 선형 필터링
 
 
 
-밉맵 예제 C05_TextureMipmap
+밉맵 예제 : [[텍스쳐 밉맵 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_TextureMipmap) 
 
 
 
@@ -480,7 +480,7 @@ GL_LINEAR : 선형 필터링
 
 
 
-배열 텍스쳐 예제 C05_ArrayTexture
+배열 텍스쳐 예제 : [[배열 텍스쳐 예제]](https://github.com/rlatkddn212/opengl_super_bible/tree/master/OpenGL_Project/C05_ArrayTexture)
 
 ![1561828431526](https://github.com/rlatkddn212/opengl_super_bible/blob/master/assets/1561828431526.png)
 
