@@ -203,7 +203,7 @@ out float gl_FragDepth;
 
 ### 스트레오 랜더링
 
-
+vr에 주로 사용하는 기술로 하나의 랜더텍스쳐로 여러 씬을 랜더링한다.
 
 예제 C09_StereoRendering
 
@@ -212,6 +212,11 @@ out float gl_FragDepth;
 ------------
 
 ## 안티에일리어싱
+
+- 오브젝트 경계선에 생기는 계단 현상을 에일리어싱이라고 부름
+- 샘플링을 통해 계단 현상을 완화 시켜준다.
+
+
 
 ### 필터링 효과
 
@@ -223,9 +228,13 @@ out float gl_FragDepth;
 
 예제 C09_MultiSampling
 
+MSAA(멀티 샘플 안티에일리어싱)
+
 
 
 ### 멀티 샘플 텍스쳐
+
+
 
 
 
@@ -243,7 +252,7 @@ out float gl_FragDepth;
 
 
 
-### 어테지먼트 없이 랜더링
+### 어테치먼트 없이 랜더링
 
 
 
